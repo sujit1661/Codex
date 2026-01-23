@@ -51,8 +51,11 @@
 ### 📒 Notes System
 
 *Personal notes section for users
+
 *Useful for saving important concepts, shortcuts, and revision points
+
 *Integrated with user sessions for personalized learning
+
 
 ---
 
@@ -88,19 +91,63 @@
 ## 📂 Project Structure
 
 ```bash
-project/
-│── app.js
-│── db.js
-│── .env
-│── public/
-│── views/
-│   ├── auth/
-│   ├── studyplan/
-│   ├── quiz/
-│   ├── profile.ejs
+CodeX-DSA-Learning-Platform/
+│
+├── node_modules/               # dependencies (gitignored)
+│
+├── public/
+│   ├── css/                    # stylesheets
+│   ├── js/                     # frontend scripts
+│   ├── images/                # images & icons
+│   └── notes/                  # 📒 DSA Notes (PDFs)
+│       ├── Arrays.pdf
+│       ├── Backtracking.pdf
+│       ├── BST.pdf
+│       ├── DBMS.pdf
+│       ├── DP.pdf
+│       ├── Graphs.pdf
+│       ├── Hashing.pdf
+│       ├── LinkedList.pdf
+│       ├── OOPS.pdf
+│       ├── OS.pdf
+│       ├── Queues.pdf
+│       ├── Recursion.pdf
+│       ├── Sorting.pdf
+│       ├── Stacks.pdf
+│       ├── Strings.pdf
+│       └── Trees.pdf
+│
+├── views/
+│   ├── auth/                   # login & register pages
+│   │   ├── login.html
+│   │   └── login_failed.html
+│   │
+│   ├── partials/               # header, footer, navbar
+│   │
+│   ├── studyplan/              # study plan & notes UI
+│   │   ├── study_plan.ejs
+│   │   ├── topic_problems.ejs
+│   │   └── notes.ejs
+│   │
+│   ├── codexAi.ejs              # AI assistant
+│   ├── dsa_topic.ejs            # DSA content page
+│   ├── home.ejs
 │   ├── problems.ejs
-│   └── codexAi.ejs
-│── package.json
+│   ├── problem_detail.ejs
+│   ├── profile.ejs
+│   ├── quiz.ejs
+│   ├── quiz_list.ejs
+│   ├── start-dsa.ejs
+│   └── todolist.ejs
+│
+├── .env                        # environment variables
+├── .gitignore
+├── db.js                       # PostgreSQL connection
+├── server.js                   # Express server (main entry)
+├── package.json
+├── package-lock.json
+└── README.md
+
 ```
 
 ---
