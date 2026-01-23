@@ -47,6 +47,13 @@
 * Maintains chat history per session
 * Helps with DSA doubts, explanations, and guidance
 
+
+### 📒 Notes System
+
+*Personal notes section for users
+*Useful for saving important concepts, shortcuts, and revision points
+*Integrated with user sessions for personalized learning
+
 ---
 
 ## 🛠 Tech Stack
