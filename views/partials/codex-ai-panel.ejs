@@ -1,0 +1,41 @@
+<!-- Top-right Navbar Button to Toggle CodeX Assistant -->
+<button id="codexToggleBtn" title="Toggle CodeX Assistant (Ctrl + /)" class="btn btn-sm btn-outline-info ms-2">
+  🤖 Ask CodeX
+</button>
+
+<iframe id="codexAIFrame" src="/ai?embed=true"></iframe>
+
+<style>
+  #codexAIFrame {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100vh;
+    border: none;
+    background: #0d0d0d;
+    z-index: 9999;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  #codexAIFrame.open {
+    transform: translateX(0%);
+  }
+</style>
+
+<script>
+  const codexPanel = document.getElementById("codexAIFrame");
+  const toggleBtn = document.getElementById("codexToggleBtn");
+
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.key === "/") {
+      e.preventDefault();
+      codexPanel.classList.toggle("open");
+    }
+  });
+
+  toggleBtn.addEventListener("click", () => {
+    codexPanel.classList.toggle("open");
+  });
+</script>

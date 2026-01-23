@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CodeX Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background-color: #0d0d0d;
+      color: #fff;
+      font-family: system-ui, sans-serif;
+      height: 100vh;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1a1a1a;
+      padding: 16px 30px;
+      border-bottom: 1px solid #333;
+    }
+
+    .topbar h2 {
+      background: linear-gradient(90deg, #64b5f6, #3f51b5, #9c27b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .topbar a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 16px;
+      border: 1px solid #444;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+
+    .topbar a:hover {
+      background-color: #333;
+    }
+
+    .clear-chat-fixed {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      background-color: #2e2e2e;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      width: 100%;
+      height: calc(100vh - 76px);
+    }
+
+    .chat-box {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-right: 4px;
+      scrollbar-width: none;
+      overscroll-behavior: contain;
+    }
+
+    .chat-box::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    .message {
+      padding: 12px 16px;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      position: relative;
+      border: 1px solid #333;
+      background-color: #1a1a1a;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background-color: #2e2e2e;
+    }
+
+    .message.ai {
+      align-self: flex-start;
+      background-color: #222222;
+    }
+
+    .message pre code {
+      position: relative;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    form {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      border-top: 1px solid #333;
+      position: sticky;
+      bottom: 0;
+      background-color: #0d0d0d;
+      z-index: 10;
+    }
+
+    textarea {
+      flex: 1;
+      background-color: #2a2a2a;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      resize: none;
+      height: 80px;
+      transition: border 0.3s ease;
+    }
+
+    textarea:focus {
+      outline: none;
+      border: 1px solid transparent;
+      background-clip: padding-box;
+      box-shadow: 0 0 0 1px transparent;
+      position: relative;
+      z-index: 1;
+      animation: glow-border 3s linear infinite;
+    }
+
+    @keyframes glow-border {
+      0% { box-shadow: 0 0 0 1px #64b5f6; }
+      50% { box-shadow: 0 0 0 1px #3f51b5; }
+      100% { box-shadow: 0 0 0 1px #9c27b0; }
+    }
+
+    button {
+      background-color: #3f51b5;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+    }
+
+    ::placeholder {
+      color: #aaa;
+    }
+
+    pre code {
+      display: block;
+      overflow-x: auto;
+      padding: 0.75em;
+      border-radius: 8px;
+      background-color: #1e1e1e;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <h2>Hello, welcome to CodeX</h2>
+    <a href="/">Home</a>
+  </div>
+
+  <button class="clear-chat-fixed" onclick="clearChat()">🗑️ Clear Chat</button>
+
+  <div class="chat-container">
+    <div class="chat-box" id="chatBox" data-lenis>
+      <% if (chatHistory && chatHistory.length > 0) { %>
+        <% for (let i = 0; i < chatHistory.length; i++) { %>
+          <% if (i % 2 === 0) { %>
+            <div class="message user"><strong>🧑 You:</strong><br><%= chatHistory[i] %></div>
+          <% } else { %>
+            <div class="message ai markdown"><strong>🤖 CodeX:</strong><br><%= chatHistory[i] %></div>
+          <% } %>
+        <% } %>
+      <% } else { %>
+        <div class="message ai">Welcome to CodeX — your personal AI assistant is here to help you!</div>
+      <% } %>
+    </div>
+
+    <form action="/ai" method="POST" id="chatForm">
+      <textarea name="prompt" id="promptInput" placeholder="Ask something..." required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    function clearChat() {
+      document.getElementById("chatBox").innerHTML = '<div class="message ai">Welcome to CodeX — your personal AI assistant is here to help you!</div>';
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const markdownBoxes = document.querySelectorAll('.markdown');
+      markdownBoxes.forEach(box => {
+        box.innerHTML = marked.parse(box.textContent);
+        box.querySelectorAll('pre code').forEach(codeBlock => {
+          hljs.highlightElement(codeBlock);
+          const copyBtn = document.createElement("button");
+          copyBtn.className = "copy-btn";
+          copyBtn.textContent = "Copy";
+          copyBtn.onclick = () => {
+            navigator.clipboard.writeText(codeBlock.innerText);
+            copyBtn.textContent = "Copied!";
+            setTimeout(() => copyBtn.textContent = "Copy", 1500);
+          };
+          codeBlock.parentElement.style.position = 'relative';
+          codeBlock.parentElement.appendChild(copyBtn);
+        });
+      });
+
+      const chatBox = document.getElementById("chatBox");
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      const lenis = new Lenis({
+        wrapper: chatBox,
+        content: chatBox,
+        smooth: true,
+        duration: 0.1,
+        easing: t => t
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      const form = document.getElementById("chatForm");
+      const textarea = document.getElementById("promptInput");
+
+      textarea.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          form.submit();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DSA Roadmap | CodeX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <style>
+    :root {
+      --clr-blue: #1890ff;
+      --clr-green: #01c3a8;
+      --clr-orange: #ffb741;
+      --clr-red: #a63d2a;
+    }
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+    background-color: #000000;
+      font-family: "Nunito", sans-serif;
+      display: grid;
+      place-items: center;
+      overflow-x: hidden;
+    }
+
+    section {
+      width: 100%;
+      max-width: 70em;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      padding: 5em 1em;
+    }
+
+    .card {
+      position: relative;
+      width: 18rem;
+      min-height: 20rem;
+      border-radius: 2.25rem;
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.6);
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 2.25rem;
+      border: 2.5px solid transparent;
+      mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      -webkit-mask-composite: destination-out;
+      z-index: -1;
+    }
+
+    .card-header,
+    .card-footer {
+      width: 100%;
+      padding: 1em 1.5em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-header .date {
+      color: #ddd;
+    }
+
+    .card-body {
+      padding: 1.5em;
+    }
+
+    .card-body h3 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 0.4em;
+    }
+
+    .card-body p {
+      color: #bbb;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .progress span {
+      display: block;
+      color: #fff;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+
+    .progress-bar {
+      background: #333;
+      height: 6px;
+      border-radius: 10px;
+      position: relative;
+      margin-bottom: 0.3rem;
+    }
+
+    .progress-bar::after {
+      content: "";
+      position: absolute;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-radius: 10px;
+      width: 0%;
+    }
+
+    .btn-countdown {
+      background: #222127;
+      color: #fff;
+      padding: 0.5rem 1.25rem;
+      border-radius: 2em;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn-countdown:hover {
+      filter: brightness(1.1);
+    }
+
+    .green { background: radial-gradient(ellipse at top right, #107667ed 0%, #151419 47%, #151419 100%); }
+    .green::before { background: linear-gradient(45deg, #232228, #232228, #01c3a8) border-box; }
+    .green .progress-bar::after { background: var(--clr-green); }
+    .green .btn-countdown:hover { background: var(--clr-green); }
+
+    .orange { background: radial-gradient(ellipse at top right, #ffb74194 0%, #151419 47%, #151419 100%); }
+    .orange::before { background: linear-gradient(45deg, #232228, #232228, #ffb741) border-box; }
+    .orange .progress-bar::after { background: var(--clr-orange); }
+    .orange .btn-countdown:hover { background: var(--clr-orange); }
+
+    .red { background: radial-gradient(ellipse at top right, #a63d2a82 0%, #151419 47%, #151419 100%); }
+    .red::before { background: linear-gradient(45deg, #232228, #232228, #a63d2a) border-box; }
+    .red .progress-bar::after { background: var(--clr-red); }
+    .red .btn-countdown:hover { background: var(--clr-red); }
+
+    .blue { background: radial-gradient(ellipse at top right, #00458f8f 0%, #151419 45%, #151419 100%); }
+    .blue::before { background: linear-gradient(45deg, #232228, #232228, #1890ff) border-box; }
+    .blue .progress-bar::after { background: var(--clr-blue); }
+    .blue .btn-countdown:hover { background: var(--clr-blue); }
+
+
+    .card {
+      position: relative;
+      width: 18rem;
+      min-height: 20rem;
+      border-radius: 2.25rem;
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.6);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.5s ease, border 0.5s ease;
+      border: 1px solid transparent;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 2.25rem;
+      background: linear-gradient(130deg, #5fdfff, #a9f1ff);
+      opacity: 0;
+      filter: blur(12px);
+      transition: opacity 0.5s ease;
+      z-index: -1;
+    }
+
+    .card:hover {
+      border: 1px solid #5fdfff;
+      box-shadow: 0 0 20px rgba(95, 223, 255, 0.3), 0 8px 25px rgba(0, 0, 0, 0.5);
+      transform: scale(1.02);
+    }
+
+    .card:hover::before {
+      opacity: 0.6;
+    }
+
+
+
+
+  </style>
+</head>
+<body>
+
+    <!-- Bootstrap Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top px-4">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <span style="color:white; font-weight: 600;">Complete DSA Roadmap</span>
+      </a>
+      <div class="ms-auto">
+        <a href="/" class="btn btn-secondary rounded-pill px-4">Home</a>
+      </div>
+    </nav>
+
+
+    <section class="text-center text-light py-5" style="margin-top: 70px;">
+      <div class="container">
+        <h1 class="display-5 fw-bold">Master Data Structures & Algorithms</h1>
+        <p class="lead text-secondary mt-3 mb-4">
+          Your personalized roadmap to crack coding interviews with a step-by-step guided curriculum.
+        </p>
+        <a href="#dsa-roadmap" class="btn btn-outline-info btn-lg px-4 rounded-pill">Start Learning Now</a>
+      </div>
+    </section>
+
+
+<section id="dsa-roadmap" class="container-fluid d-flex flex-wrap justify-content-center gap-4 px-4 pb-5">
+  <!-- your .card elements here -->
+    <!-- Cards -->
+    <!-- Existing Cards -->
+   <div class="card green"><div class="card-header"><div class="date">Step 1</div></div><div class="card-body"><h3>DSA Basics</h3><p>Foundations</p><div class="progress"><span>Progress</span><div class="progress-bar"></div><span>0%</span></div></div><div class="card-footer"><a href="/learning-paths/basics" class="btn-countdown">Start Basics</a></div></div>
+<div class="card orange"><div class="card-header"><div class="date">Step 2</div></div><div class="card-body"><h3>Loops</h3><p>Pattern Practice</p><div class="progress"><span>Progress</span><div class="progress-bar"></div><span>0%</span></div></div><div class="card-footer"><a href="/learning-paths/loops" class="btn-countdown">Start Loops</a></div></div>
+<div class="card red"><div class="card-header"><div class="date">Step 3</div></div><div class="card-body"><h3>Arrays</h3><p>Sliding Window</p><div class="progress"><span>Progress</span><div class="progress-bar"></div><span>0%</span></div></div><div class="card-footer"><a href="/learning-paths/arrays" class="btn-countdown">Start Arrays</a></div></div>
+<div class="card blue"><div class="card-header"><div class="date">Step 4</div></div><div class="card-body"><h3>Searching & Sorting</h3><p>Binary, Merge, Quick Sort</p><div class="progress"><span>Progress</span><div class="progress-bar"></div><span>0%</span></div></div><div class="card-footer"><a href="/learning-paths/search-sort" class="btn-countdown">Start Sorting</a></div></div>
+<div class="card green"><div class="card-header"><div class="date">Step 5</div></div><div class="card-body"><h3>Strings</h3><p>Manipulation</p><div class="progress"><span>Progress</span><div class="progress-bar"></div><span>0%</span></div></div><div class="card-footer"><a href="/learning-paths/strings" class="btn-countdown">Start Strings</a></div></div>
+<div class="card green"><div class="card-header"><div class="date">Step 6</div></div><div class="card-body"><h3>OOPs</h3><p>Object-Oriented Programming</p><div class="progress"><span>Progress</span><div class="progress-bar"></div><span>0%</span></div></div><div class="card-footer"><a href="/learning-paths/oops" class="btn-countdown">Start OOPs</a></div></div>
+<div class="card orange"><div class="card-header"><div class="date">Step 7</div></div><div class="card-body"><h3>Recursion</h3><p>Divide & Conquer</p><div class="progress"><span>Progress</span><div class="progress-bar"></div><span>0%</span></div></div><div class="card-footer"><a href="/learning-paths/recursion" class="btn-countdown">Start Recursion</a></div></div>
+<div class="card red"><div class="card-header"><div class="date">Step 8</div></div><div class="card-body"><h3>Linked Lists</h3><p>Singly & Doubly</p><div class="progress"><span>Progress</span><div class="progress-bar"></div><span>0%</span></div></div><div class="card-footer"><a href="/learning-paths/linkedlists" class="btn-countdown">Start Linked Lists</a></div></div>
+<div class="card blue"><div class="card-header"><div class="date">Step 9</div></div><div class="card-body"><h3>Stacks & Queues</h3><p>LIFO / FIFO</p><div class="progress"><span>Progress</span><div class="progress-bar"></div><span>0%</span></div></div><div class="card-footer"><a href="/learning-paths/stacks-queues" class="btn-countdown">Start Stacks & Queues</a></div></div>
+<div class="card green"><div class="card-header"><div class="date">Step 10</div></div><div class="card-body"><h3>Trees</h3><p>Binary / BST</p><div class="progress"><span>Progress</span><div class="progress-bar"></div><span>0%</span></div></div><div class="card-footer"><a href="/learning-paths/trees" class="btn-countdown">Start Trees</a></div></div>
+<div class="card orange"><div class="card-header"><div class="date">Step 11</div></div><div class="card-body"><h3>Graphs</h3><p>BFS / DFS</p><div class="progress"><span>Progress</span><div class="progress-bar"></div><span>0%</span></div></div><div class="card-footer"><a href="/learning-paths/graphs" class="btn-countdown">Start Graphs</a></div></div>
+<div class="card red"><div class="card-header"><div class="date">Step 12</div></div><div class="card-body"><h3>Hashmaps</h3><p>Hashing Logic</p><div class="progress"><span>Progress</span><div class="progress-bar"></div><span>0%</span></div></div><div class="card-footer"><a href="/learning-paths/hashmaps" class="btn-countdown">Start Hashmaps</a></div></div>
+<div class="card blue"><div class="card-header"><div class="date">Step 13</div></div><div class="card-body"><h3>Greedy</h3><p>Local Optimization</p><div class="progress"><span>Progress</span><div class="progress-bar"></div><span>0%</span></div></div><div class="card-footer"><a href="/learning-paths/greedy" class="btn-countdown">Start Greedy</a></div></div>
+
+ </section>
+
+
+</body>
+</html>

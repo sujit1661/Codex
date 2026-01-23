@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= user.name %> | CodeX Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #e6edf3;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar {
+      background-color: #161b22;
+      border-bottom: 1px solid #21262d;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.4rem;
+      color: #58a6ff !important;
+    }
+
+    .nav-link {
+      color: #c9d1d9 !important;
+    }
+
+    .profile-header {
+      background-color: #161b22;
+      padding: 30px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .profile-header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #2ea043;
+    }
+
+    .profile-details h2 {
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .profile-details p {
+      margin-bottom: 6px;
+      color: #8b949e;
+    }
+
+    .metric-card {
+      background-color: #161b22;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 0.5rem #00000033;
+    }
+
+    .metric-title {
+      color: #58a6ff;
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+
+    .badge-list img {
+      height: 60px;
+      margin-right: 10px;
+    }
+
+    .heatmap {
+      display: grid;
+      grid-template-columns: repeat(52, 1fr);
+      gap: 2px;
+    }
+
+    .heatmap div {
+      width: 10px;
+      height: 10px;
+      background-color: #2ea043;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand" href="/">CodeX</a>
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/start-dsa">DSA Roadmap</a></li>
+        <li class="nav-item"><a class="nav-link" href="/todo">Todo-List</a></li>
+        <li class="nav-item"><a class="nav-link" href="/problems">Problems</a></li>
+        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container py-5">
+  <!-- 🔷 User Header -->
+  <div class="profile-header mb-4">
+    <img src="<%= user.profile_image || 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Dog_coat_variation.png' %>" alt="Profile">
+    <div class="profile-details">
+      <h2><%= user.name %></h2>
+      <p><i class="bi bi-geo-alt-fill"></i> <%= user.country || 'India' %></p>
+      <p><i class="bi bi-envelope-fill"></i> <%= user.email %></p>
+      <p><i class="bi bi-bar-chart-fill"></i> Rank: <%= user.rank || 'Unranked' %></p>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- 🟩 Problem Stats -->
+    <div class="col-md-6">
+      <div class="metric-card">
+        <div class="metric-title">Problem Solving</div>
+        <p><strong><%= user.total_solved || 0 %></strong> Solved</p>
+        <p><%= user.attempting || 0 %> Currently Attempting</p>
+        <p><%= user.java_solved || 0 %> in Java</p>
+      </div>
+    </div>
+
+    <!-- 🟨 Badges -->
+    <div class="col-md-6">
+      <div class="metric-card">
+        <div class="metric-title">Badges Earned</div>
+        <div class="badge-list d-flex align-items-center">
+          <img src="https://leetcode.com/static/images/badges/2023-100-days-badge.png" alt="100 Day Badge">
+          <img src="https://leetcode.com/static/images/badges/2023-50-days-badge.png" alt="50 Day Badge">
+          <img src="https://leetcode.com/static/images/badges/2023-30-days-badge.png" alt="30 Day Badge">
+        </div>
+      </div>
+    </div>
+
+    <!-- 🟦 Heatmap -->
+    <div class="col-12">
+      <div class="metric-card">
+        <div class="metric-title"><%= user.total_submissions || 0 %> Submissions in Past Year</div>
+        <div class="heatmap">
+          <% for (let i = 0; i < 365; i++) { %>
+            <div style="background-color: <%= i % 5 === 0 ? '#2ea043' : i % 3 === 0 ? '#0e4429' : '#161b22' %>;"></div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

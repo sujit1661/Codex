@@ -1,0 +1,99 @@
+<!-- xLens Button -->
+<div id="xLens-btn" onclick="togglexLens()">
+  <i class="fas fa-robot"></i>
+</div>
+
+<!-- xLens Panel -->
+<div id="xLens-box">
+  <textarea id="xLens-query" placeholder="Ask CodeX AI..."></textarea>
+  <button onclick="sendxLens()">Ask</button>
+  <div id="xLens-output"></div>
+</div>
+
+<style>
+#xLens-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #3b82f6;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 0 10px #0006;
+  cursor: pointer;
+}
+
+#xLens-box {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 320px;
+  background: #1f1f1f;
+  padding: 10px;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  z-index: 1001;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+#xLens-query {
+  width: 100%;
+  height: 60px;
+  background: #2e2e2e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+#xLens-output {
+  max-height: 150px;
+  overflow-y: auto;
+  color: #ddd;
+  font-size: 0.9em;
+}
+</style>
+
+<script>
+function togglexLens() {
+  const panel = document.getElementById("xLens-box");
+  panel.style.display = panel.style.display === "none" ? "block" : "none";
+}
+
+// Auto-fill selected text into xLens
+document.addEventListener("mouseup", () => {
+  const selectedText = window.getSelection().toString().trim();
+  if (selectedText.length > 0) {
+    document.getElementById("xLens-query").value = selectedText;
+    document.getElementById("xLens-box").style.display = "block";
+  }
+});
+
+async function sendxLens() {
+  const input = document.getElementById("xLens-query").value;
+  const output = document.getElementById("xLens-output");
+  output.innerText = "Thinking...";
+
+  try {
+    const res = await fetch("/assistant", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question: input })
+    });
+
+    const data = await res.json();
+    output.innerText = data.answer || "No response from assistant.";
+  } catch (err) {
+    output.innerText = "Error: Could not reach assistant.";
+    console.error(err);
+  }
+}
+</script>

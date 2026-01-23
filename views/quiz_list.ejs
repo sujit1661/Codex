@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Topics | CodeX</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+      html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+
+    html, body {
+      width: 100%;
+      overflow-x: hidden;  /* 💥 This prevents horizontal scrolling */
+      margin: 0;
+      overscroll-behavior-y: contain;
+      padding: 0;
+    }
+
+    body {
+      background-color: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+       will-change: scroll-position; /* ✅ hint browser to optimize */
+
+    }
+    .navbar {
+      background-color: #0a0a0a;
+      padding: 12px 24px;
+      border-bottom: 1px solid #333;
+    }
+    .navbar-brand {
+      color: #58a6ff;
+      font-weight: bold;
+      font-size: 1.4rem;
+      text-decoration: none;
+    }
+    .navbar-nav .nav-link {
+      color: #e6edf3;
+      margin-left: 15px;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+    .ag-format-container {
+      width: 100%;
+      max-width: 1142px;
+      margin: 0 auto;
+      padding: 0 15px;
+      overflow-x: hidden;
+    }
+
+
+        .ag-courses-item_link:hover .ag-courses-item_bg {
+      transform: scale(2.5); /* ✅ smooth & safe */
+    }
+
+    .ag-courses_box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      padding: 50px 0;
+    }
+
+      .ag-courses_item {
+      flex: 1 1 calc(33.333% - 30px);  /* ✅ consistent with gap */
+      min-width: 280px;
+      max-width: 100%;  /* ✅ prevents overflow */
+    }
+
+
+    .ag-courses-item_link {
+      display: block;
+      padding: 30px 20px;
+      background-color: #121212;
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      text-decoration: none;
+      height: 100%;
+    }
+    .ag-courses-item_link:hover {
+      color: #FFF;
+    }
+    .ag-courses-item_link:hover .ag-courses-item_bg {
+      transform: scale(10);
+    }
+    .ag-courses-item_title {
+      min-height: 87px;
+      margin-bottom: 5px;
+      font-weight: bold;
+      font-size: 30px;
+      color: #FFF;
+      position: relative;
+      z-index: 2;
+    }
+    .ag-courses-item_subtitle {
+      font-size: 16px;
+      color: #b0b0b0;
+      margin-bottom: 25px;
+      position: relative;
+      z-index: 2;
+    }
+    .ag-courses-item_date-box {
+      font-size: 18px;
+      color: #FFF;
+      position: relative;
+      z-index: 2;
+      margin-top: auto;
+    }
+    .ag-courses-item_date {
+      font-weight: bold;
+      color: #f9b234;
+      transition: color .5s ease;
+    }
+    .ag-courses-item_link:hover .ag-courses-item_date {
+      color: #FFF;
+    }
+    .ag-courses-item_bg {
+      height: 128px;
+      width: 128px;
+      background-color: #f9b234;
+      position: absolute;
+      top: -75px;
+      right: -75px;
+      border-radius: 50%;
+      transition: all .5s ease;
+    }
+    .ag-courses_item:nth-child(1) .ag-courses-item_bg { background-color: #f9b234; }
+    .ag-courses_item:nth-child(2) .ag-courses-item_bg { background-color: #3ecd5e; }
+    .ag-courses_item:nth-child(3) .ag-courses-item_bg { background-color: #e44002; }
+    .ag-courses_item:nth-child(4) .ag-courses-item_bg { background-color: #952aff; }
+    .ag-courses_item:nth-child(5) .ag-courses-item_bg { background-color: #cd3e94; }
+    .ag-courses_item:nth-child(6) .ag-courses-item_bg { background-color: #4c49ea; }
+    .ag-courses_item:nth-child(7) .ag-courses-item_bg { background-color: #1abc9c; }
+    .ag-courses_item:nth-child(8) .ag-courses-item_bg { background-color: #f39c12; }
+    .ag-courses_item:nth-child(9) .ag-courses-item_bg { background-color: #2ecc71; }
+    .ag-courses_item:nth-child(10) .ag-courses-item_bg { background-color: #e74c3c; }
+    .ag-courses_item:nth-child(11) .ag-courses-item_bg { background-color: #9b59b6; }
+    .ag-courses_item:nth-child(12) .ag-courses-item_bg { background-color: #3498db; }
+    .ag-courses_item:nth-child(13) .ag-courses-item_bg { background-color: #cd6133; }
+    @media only screen and (max-width: 979px) {
+      .ag-courses_item { flex-basis: calc(50% - 30px); }
+      .ag-courses-item_title { font-size: 24px; }
+    }
+    @media only screen and (max-width: 639px) {
+      .ag-courses_item { flex-basis: 100%; }
+      .ag-courses-item_title { font-size: 24px; }
+      .ag-courses-item_link { padding: 22px 40px; }
+      .ag-courses-item_date-box { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" style="color:white" href="/">CodeX</a>
+      <div class="navbar-nav">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/start-dsa">DSA Roadmap</a>
+        <a class="nav-link active" href="/todo">Todo-List</a>
+        <a class="nav-link" href="/problems">Problems</a>
+      </div>
+    </div>
+  </nav>
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h2 class="text-info" style="color:white">CodeX Quiz Topics</h2>
+        <p class="text-light fst-italic">
+          Empowered by <strong>CodeX</strong> — your trusted platform to conquer Data Structures & Algorithms with clarity, practice, and precision.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ag-format-container">
+    <div class="ag-courses_box">
+      <%
+        const sequence = [
+          'dsa-basics', 'loops', 'arrays', 'strings', 'oops', 'recursion',
+          'stacks-queues', 'queues', 'linkedlists', 'trees', 'hashmaps', 'graphs', 'greedy'
+        ];
+
+        const subtitles = {
+          'dsa-basics': 'Fundamental Concepts',
+          'loops': 'Control Flow Essentials',
+          'arrays': 'Data Structure Basics',
+          'strings': 'Text Manipulation',
+          'oops': 'Object-Oriented Programming',
+          'recursion': 'Solving Problems Recursively',
+          'stacks-queues': 'LIFO and FIFO Structures',
+          'queues': 'First-In, First-Out',
+          'linkedlists': 'Dynamic Data Structures',
+          'trees': 'Hierarchical Structures',
+          'hashmaps': 'Key-Value Pairs',
+          'graphs': 'Network Representations',
+          'greedy': 'Optimal Solutions'
+        };
+
+        sequence.forEach((topicSlug, i) => {
+          const quiz = quizzes.find(q => q.topic_slug === topicSlug);
+          if (!quiz) return;
+      %>
+      <div class="ag-courses_item">
+        <a href="/quiz/<%= quiz.topic_slug %>" class="ag-courses-item_link d-flex flex-column">
+          <div class="ag-courses-item_bg"></div>
+          <div class="ag-courses-item_title text-capitalize">
+            <%= quiz.topic_slug.replace(/-/g, ' ') %>
+          </div>
+          <div class="ag-courses-item_subtitle">
+            <%= subtitles[quiz.topic_slug] || '' %>
+          </div>
+          <div class="ag-courses-item_date-box">
+            <span class="ag-courses-item_date">Solve Quiz</span>
+          </div>
+        </a>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+
+</body>
+</html>
