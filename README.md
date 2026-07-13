@@ -1,136 +1,103 @@
-# CodeX 🚀
+# 🚀 CodeX – DSA Learning & Competitive Coding Platform
 
-**CodeX** is a full‑stack DSA learning and competitive coding platform inspired by LeetCode, GeeksforGeeks, and W3Schools. It combines structured DSA learning paths, coding problems with an online compiler, quizzes, study plans, user profiles, and an AI assistant — all in one place.
+> A full-stack coding platform inspired by **LeetCode**, **GeeksforGeeks**, and **W3Schools**, designed to help students learn Data Structures & Algorithms, solve coding problems, take quizzes, follow structured study plans, and get AI-powered assistance—all in one place.
+
+![Node.js](https://img.shields.io/badge/Node.js-Runtime-green?logo=node.js)
+![Express.js](https://img.shields.io/badge/Express.js-Backend-black?logo=express)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-336791?logo=postgresql)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
-## 🔥 Features
+## 📖 Overview
 
-### 🧠 DSA Learning Platform
+**CodeX** is a comprehensive learning platform built for students preparing for coding interviews and competitive programming.
 
-* Topic‑wise DSA content (Arrays, Strings, Searching, Sorting, Trees, etc.)
-* Clean learning paths similar to GeeksforGeeks / W3Schools
-* Beginner‑friendly explanations
+The platform combines structured DSA tutorials, coding challenges, quizzes, study plans, notes, and an AI assistant to provide a complete learning experience.
 
-### 💻 Coding Problems (LeetCode‑style)
+Whether you're just starting with DSA or preparing for technical interviews, CodeX helps you learn, practice, and improve—all from a single platform.
 
-* Hundreds of DSA problems stored in PostgreSQL
-* Difficulty levels: Easy / Medium
-* Multi‑language support (Python, Java, C, C++, JavaScript, etc.)
-* Default code templates + 15–20 test cases per problem
-* Online code execution using a remote compiler API
+---
+
+## ✨ Features
+
+### 📚 DSA Learning
+
+- Structured DSA learning paths
+- Beginner-friendly explanations
+- Topics like Arrays, Strings, Trees, Graphs, Dynamic Programming, and more
+- Clean interface inspired by GeeksforGeeks and W3Schools
+
+### 💻 Coding Problems
+
+- Hundreds of DSA problems
+- Easy & Medium difficulty levels
+- Multi-language code editor
+- Default code templates
+- Multiple hidden test cases
+- Online code execution using a Remote Compiler API
 
 ### 🧪 Quizzes
 
-* Topic‑wise MCQ quizzes
-* Instant score calculation
-* Useful for revision & self‑assessment
+- Topic-wise MCQ quizzes
+- Instant score calculation
+- Performance evaluation
+- Great for revision
 
-### 📊 Study Plan
+### 📅 Study Plan
 
-* Auto‑generated study plans from problem topics
-* Topic‑wise problem listing
+- Auto-generated study roadmap
+- Topic-wise problem recommendations
+- Organized learning progression
 
-### 👤 User System
+### 👤 User Management
 
-* Secure authentication (Login / Register)
-* Session‑based auth using `express-session`
-* Profile page with activity stats
+- Secure Login & Registration
+- Session-based Authentication
+- Personalized User Profile
+- Activity Tracking
 
-### 📝 Todo List
+### 📝 Personal Todo List
 
-* Personal task manager for daily study goals
+- Daily learning goals
+- Track pending tasks
+- Improve study consistency
 
-### 🤖 AI Assistant (Gemini)
+### 🤖 AI Assistant
 
-* Built‑in AI assistant using **Google Gemini API**
-* Maintains chat history per session
-* Helps with DSA doubts, explanations, and guidance
+- Powered by Google Gemini API
+- Session-based chat history
+- DSA explanations
+- Coding guidance
+- Concept clarification
 
+### 📒 Notes Library
 
-### 📒 Notes System
-
-*Personal notes section for users
-
-*Useful for saving important concepts, shortcuts, and revision points
-
-*Integrated with user sessions for personalized learning
-
-
----
-
-## 🛠 Tech Stack
-
-**Frontend**
-
-* EJS
-* HTML, CSS, Bootstrap
-
-**Backend**
-
-* Node.js
-* Express.js
-
-**Database**
-
-* PostgreSQL
-
-**Authentication & Security**
-
-* bcrypt (password hashing)
-* express‑session
-* dotenv
-
-**APIs & Integrations**
-
-* Remote Code Execution API
-* Google Gemini AI
+- Topic-wise downloadable notes
+- Revision material
+- User-friendly organization
 
 ---
 
-## 📂 Project Structure
+## 🏗️ Project Structure
 
-```bash
+```text
 CodeX-DSA-Learning-Platform/
 │
-├── node_modules/               # dependencies (gitignored)
+├── node_modules/
 │
 ├── public/
-│   ├── css/                    # stylesheets
-│   ├── js/                     # frontend scripts
-│   ├── images/                # images & icons
-│   └── notes/                  # 📒 DSA Notes (PDFs)
-│       ├── Arrays.pdf
-│       ├── Backtracking.pdf
-│       ├── BST.pdf
-│       ├── DBMS.pdf
-│       ├── DP.pdf
-│       ├── Graphs.pdf
-│       ├── Hashing.pdf
-│       ├── LinkedList.pdf
-│       ├── OOPS.pdf
-│       ├── OS.pdf
-│       ├── Queues.pdf
-│       ├── Recursion.pdf
-│       ├── Sorting.pdf
-│       ├── Stacks.pdf
-│       ├── Strings.pdf
-│       └── Trees.pdf
+│   ├── css/
+│   ├── js/
+│   ├── images/
+│   └── notes/
 │
 ├── views/
-│   ├── auth/                   # login & register pages
-│   │   ├── login.html
-│   │   └── login_failed.html
-│   │
-│   ├── partials/               # header, footer, navbar
-│   │
-│   ├── studyplan/              # study plan & notes UI
-│   │   ├── study_plan.ejs
-│   │   ├── topic_problems.ejs
-│   │   └── notes.ejs
-│   │
-│   ├── codexAi.ejs              # AI assistant
-│   ├── dsa_topic.ejs            # DSA content page
+│   ├── auth/
+│   ├── partials/
+│   ├── studyplan/
+│   ├── codexAi.ejs
+│   ├── dsa_topic.ejs
 │   ├── home.ejs
 │   ├── problems.ejs
 │   ├── problem_detail.ejs
@@ -140,39 +107,81 @@ CodeX-DSA-Learning-Platform/
 │   ├── start-dsa.ejs
 │   └── todolist.ejs
 │
-├── .env                        # environment variables
+├── .env
 ├── .gitignore
-├── db.js                       # PostgreSQL connection
-├── server.js                   # Express server (main entry)
+├── db.js
+├── server.js
 ├── package.json
 ├── package-lock.json
 └── README.md
-
 ```
 
 ---
 
-## ⚙️ Environment Variables
+## 🛠️ Tech Stack
 
-Create a `.env` file:
+| Technology | Purpose |
+|------------|---------|
+| Node.js | Runtime Environment |
+| Express.js | Backend Framework |
+| PostgreSQL | Database |
+| EJS | Template Engine |
+| HTML, CSS, Bootstrap | Frontend UI |
+| Google Gemini API | AI Assistant |
+| Remote Compiler API | Online Code Execution |
+| bcrypt | Password Hashing |
+| express-session | Authentication |
+| dotenv | Environment Variables |
+
+---
+
+## ⚙️ Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/sujit1661/CodeX.git
+cd CodeX
+```
+
+---
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+### 3. Configure Environment Variables
+
+Create a `.env` file in the project root.
 
 ```env
 PORT=3000
 SESSION_SECRET=your_session_secret
-DATABASE_URL=postgres_connection_url
+DATABASE_URL=your_postgresql_connection_string
 GEMINI_API_KEY=your_gemini_api_key
 ```
 
 ---
 
-## ▶️ Run Locally
+### 4. Start the Application
 
 ```bash
-npm install
-node app.js
+node server.js
 ```
 
-Open:
+Or, if using Nodemon:
+
+```bash
+nodemon server.js
+```
+
+---
+
+### 5. Open in Browser
 
 ```
 http://localhost:3000
@@ -180,23 +189,69 @@ http://localhost:3000
 
 ---
 
-## 🎯 Future Improvements
+## 💬 Platform Highlights
 
-* Code submission tracking
-* Problem discussion section
-* Leaderboard & streaks
-* Dark mode
-* Admin dashboard
+Some of the major capabilities include:
+
+- Learn Data Structures & Algorithms
+- Solve coding challenges
+- Execute code online
+- Practice quizzes
+- Follow structured study plans
+- Save personal notes
+- Manage daily learning tasks
+- Get AI-powered coding assistance
+- Track learning progress
 
 ---
 
-## 🙌 Author
+## 🔒 Security
 
-**Sujit**
-Passionate about Full‑Stack Development, DSA, and AI‑powered learning platforms.
+The platform follows standard security practices.
+
+- ✅ Password hashing using bcrypt
+- ✅ Session-based authentication
+- ✅ Environment variables for secrets
+- ✅ Secure PostgreSQL integration
+- ✅ Protected user-specific data
+
+---
+
+## 🚀 Future Improvements
+
+- Code submission history
+- Leaderboards & coding streaks
+- Problem discussion forum
+- Dark Mode
+- Admin Dashboard
+- Email Verification
+- Progress Analytics
+- Contest Support
+- Achievement Badges
+- Docker Deployment
+
+---
+
+## 👨‍💻 Author
+
+**Sujit Sadalage**
+
+**B.Tech in Artificial Intelligence & Data Science (2022–2026)**
+
+Aspiring **AI Engineer | Backend Developer | Python Developer**
+
+- GitHub: https://github.com/sujit1661
 
 ---
 
 ## ⭐ Support
 
-If you like this project, give it a ⭐ on GitHub — it really helps!
+If you found this project helpful, consider giving it a **⭐ Star** on GitHub.
+
+It helps others discover the project and motivates future improvements.
+
+---
+
+## 📄 License
+
+This project is intended for learning and educational purposes. Feel free to fork, modify, and build upon it.
